@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <boost/program_options.hpp>
 #include <boost/filesystem.hpp>
+#include <boost/assert.hpp>
 
 
 using namespace std;
@@ -37,7 +38,7 @@ int main(int argc, char** argv)
     return 1;
   }
 
-  ROS_ASSERT(!bfs::exists(dst));
+  BOOST_ASSERT(!bfs::exists(dst));
   StreamSequenceBase::Ptr sseq = StreamSequenceBase::initializeFromDirectory(src);
   bfs::create_directory(dst);
   bfs::create_directory(dst + "/depth");
@@ -48,10 +49,11 @@ int main(int argc, char** argv)
   for(size_t i = 0; i < sseq->size(); ++i) {
     cout << i << " / " << sseq->size() << endl;
     sseq->readFrame(i, &frame);
-    ros::Time ts(sseq->timestamps_[i]);
+    double ts = sseq->timestamps_[i];
     
     ostringstream ossrgb;
-    ossrgb << dst << "/rgb/" << ts << ".png";
+
+    ossrgb << std::setprecision(6) << std::fixed << dst << "/rgb/" << ts << ".png";
     cv::imwrite(ossrgb.str(), frame.img_);
 
     cv::Mat_<ushort> depth(cv::Size(frame.depth_->cols(), frame.depth_->rows()), 0);
@@ -61,10 +63,10 @@ int main(int argc, char** argv)
         depth(y, x) = frame.depth_->coeffRef(y, x) * 5;  
 
     ostringstream ossd;
-    ossd << dst << "/depth/" << ts << ".png";
+    ossd << std::setprecision(6) << std::fixed << dst << "/depth/" << ts << ".png";
     cv::imwrite(ossd.str(), depth);
 
-    assoc << ts << " rgb/" << ts << ".png "
+    assoc << std::setprecision(6) << std::fixed << ts << " rgb/" << ts << ".png "
           << ts << " depth/" << ts << ".png" << endl;
   }
 

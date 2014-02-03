@@ -25,7 +25,7 @@ void clams::StreamSequenceBase::load (const std::string &root_path)
 
 size_t clams::StreamSequenceBase::seek(double timestamp, double* dt) const
 {
-  ROS_ASSERT(!timestamps_.empty());
+  BOOST_ASSERT(!timestamps_.empty());
   
   // TODO: This could be much faster than linear search.
   size_t nearest = 0;
@@ -102,7 +102,7 @@ clams::Cloud::ConstPtr clams::StreamSequenceBase::operator[] (size_t idx) const
 
 clams::Cloud::ConstPtr clams::StreamSequenceBase::at (size_t idx) const
 {
-  ROS_ASSERT (idx < size ());
+  BOOST_ASSERT (idx < size ());
   return operator[] (idx);
 }
 

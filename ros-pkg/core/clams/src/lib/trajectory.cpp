@@ -51,7 +51,7 @@ namespace clams
   const Eigen::Affine3d& Trajectory::get(size_t idx) const
   {
     if(idx > transforms_.size()) {
-      ROS_FATAL_STREAM("Tried to get transform " << idx << " / " << transforms_.size());
+      std::cout<<"Tried to get transform " << idx << " / " << transforms_.size();
       abort();
     }
     return *transforms_[idx];

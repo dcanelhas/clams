@@ -1,7 +1,7 @@
 #ifndef TRAJECTORY_H
 #define TRAJECTORY_H
 
-#include <ros/assert.h>
+// #include <ros/assert.h>
 #include <serializable/serializable.h>
 #include <eigen_extensions/eigen_extensions.h>
 

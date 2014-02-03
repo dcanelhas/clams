@@ -1,3 +1,4 @@
+#include <boost/assert.hpp>
 #include <clams/slam_calibrator.h>
 
 using namespace std;
@@ -49,7 +50,7 @@ namespace clams
 
   Cloud::Ptr SlamCalibrator::buildMap(StreamSequenceBase::ConstPtr sseq, const Trajectory& traj, double max_range, double vgsize)
   {
-    ROS_DEBUG_STREAM("Building slam calibration map using max range of " << max_range);
+    std::cout<<"Building slam calibration map using max range of " << max_range << std::endl;
   
     Cloud::Ptr map(new Cloud);
     int num_used_frames = 0;
@@ -111,13 +112,13 @@ namespace clams
 
   size_t SlamCalibrator::size() const
   {
-    ROS_ASSERT(trajectories_.size() == sseqs_.size());
+    BOOST_ASSERT(trajectories_.size() == sseqs_.size());
     return trajectories_.size();
   }
 
   DiscreteDepthDistortionModel SlamCalibrator::calibrate() const
   {
-    ROS_ASSERT(!sseqs_.empty());
+    BOOST_ASSERT(!sseqs_.empty());
     DiscreteDepthDistortionModel model(sseqs_[0]->proj_.width_, sseqs_[0]->proj_.height_);
 
     size_t total_num_training = 0;
@@ -156,7 +157,7 @@ namespace clams
     #pragma omp parallel for
     for(size_t i = 0; i < indices.size(); ++i) {
       size_t idx = indices[i];
-      ROS_ASSERT(traj.exists(idx));
+      BOOST_ASSERT(traj.exists(idx));
       cout << "." << flush;
 
       Frame measurement;

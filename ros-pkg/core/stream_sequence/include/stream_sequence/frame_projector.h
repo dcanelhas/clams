@@ -1,8 +1,8 @@
 #ifndef FRAME_PROJECTOR_H
 #define FRAME_PROJECTOR_H
 
-#include <ros/assert.h>
-#include <ros/console.h>
+// #include <ros/assert.h>
+// #include <ros/console.h>
 #include <pcl/common/transforms.h>
 #include <pcl/common/distances.h>
 #include <opencv2/core/core.hpp>

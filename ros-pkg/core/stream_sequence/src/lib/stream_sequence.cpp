@@ -13,11 +13,11 @@ namespace clams
   
   void StreamSequence::save() const
   {
-    ROS_ASSERT(0);
-    // ROS_ASSERT(proj_.initialized());
+    BOOST_ASSERT(0);
+    // BOOST_ASSERT(proj_.initialized());
     // proj_.save(root_path_ + "/primesense_model");
 
-    // ROS_ASSERT(timestamps_.size() == clk_names_.size());
+    // BOOST_ASSERT(timestamps_.size() == clk_names_.size());
     // for(size_t i = 0; i < timestamps_.size(); ++i) { 
     //   ofstream fs((root_path_ + "/" + clk_names_[i]).c_str());
     //   fs.precision(10);
@@ -29,7 +29,7 @@ namespace clams
 
   void StreamSequence::init(const std::string& root_path)
   {
-    ROS_ASSERT(!bfs::exists(root_path));
+    BOOST_ASSERT(!bfs::exists(root_path));
     root_path_ = root_path;
     bfs::create_directory(root_path_);
   }
@@ -37,7 +37,7 @@ namespace clams
   void StreamSequence::loadImpl(const std::string& dir)
   {
     root_path_ = dir;
-    ROS_WARN("Using old, deprecated StreamSequence.  FrameProjector is being constructed manually.");
+    std::cout<<"Using old, deprecated StreamSequence.  FrameProjector is being constructed manually."<<std::endl;
     proj_.width_ = 640; 
     proj_.height_ = 480;
     proj_.fx_ = 525;
@@ -53,7 +53,7 @@ namespace clams
     clk_names_.clear();
     bfs::recursive_directory_iterator it(root_path_), eod;
     BOOST_FOREACH(const bfs::path& p, make_pair(it, eod)) {
-      ROS_ASSERT(is_regular_file(p));
+      BOOST_ASSERT(is_regular_file(p));
       if(p.leaf().string().substr(0, 3).compare("img") == 0 &&
          (bfs::extension(p).compare(".ppm") == 0 ||
           bfs::extension(p).compare(".png") == 0))
@@ -65,8 +65,8 @@ namespace clams
       else if(bfs::extension(p).compare(".clk") == 0)
         clk_names_.push_back(p.leaf().string());
     }
-    ROS_ASSERT(img_names_.size() == dpt_names_.size());
-    ROS_ASSERT(img_names_.size() == clk_names_.size());
+    BOOST_ASSERT(img_names_.size() == dpt_names_.size());
+    BOOST_ASSERT(img_names_.size() == clk_names_.size());
 
     // -- Sort all filenames.
     sort(img_names_.begin(), img_names_.end());
@@ -77,7 +77,7 @@ namespace clams
     timestamps_.resize(clk_names_.size());
     for(size_t i = 0; i < clk_names_.size(); ++i) {
       ifstream fs((root_path_ + "/" + clk_names_[i]).c_str());
-      ROS_ASSERT(fs.is_open());
+      BOOST_ASSERT(fs.is_open());
       fs >> timestamps_[i];
       fs.close();
     }
@@ -118,7 +118,7 @@ namespace clams
 
   void StreamSequence::readFrameImpl(size_t idx, Frame* frame) const
   {
-    ROS_ASSERT(idx < img_names_.size());
+    BOOST_ASSERT(idx < img_names_.size());
     frame->img_ = cv::imread(root_path_ + "/" + img_names_[idx], 1);
     frame->depth_ = DepthMatPtr(new DepthMat);
     eigen_extensions::load(root_path_ + "/" + dpt_names_[idx], frame->depth_.get());
@@ -136,9 +136,9 @@ namespace clams
 
   size_t StreamSequence::size() const
   {
-    ROS_ASSERT(img_names_.size() == dpt_names_.size());
-    ROS_ASSERT(img_names_.size() == clk_names_.size());
-    ROS_ASSERT(img_names_.size() == timestamps_.size());
+    BOOST_ASSERT(img_names_.size() == dpt_names_.size());
+    BOOST_ASSERT(img_names_.size() == clk_names_.size());
+    BOOST_ASSERT(img_names_.size() == timestamps_.size());
     return img_names_.size();
   }
 

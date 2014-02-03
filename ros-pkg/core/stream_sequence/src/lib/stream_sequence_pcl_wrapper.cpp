@@ -31,7 +31,7 @@ namespace clams
 
   void StreamSequencePCLWrapper::readFrameImpl(size_t idx, Frame* frame) const
   {
-    ROS_ASSERT (idx < grabber_->size ());
+    BOOST_ASSERT (idx < grabber_->size ());
     clams::Cloud::ConstPtr cloud = grabber_->at (idx);
     // Make img_ and depth_;
     frame->timestamp_ = timestamps_[idx];

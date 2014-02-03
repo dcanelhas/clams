@@ -1,5 +1,5 @@
 #include <stream_sequence/frame_projector.h>
-
+#include <iomanip>
 using namespace std;
 using namespace Eigen;
 
@@ -128,8 +128,8 @@ namespace clams
   
   void FrameProjector::cloudToFrame(const Cloud& pcd, Frame* frame, IndexMap* indexmap) const
   {
-    ROS_ASSERT(frame);
-    ROS_ASSERT(width_ != -1 && height_ != -1 && cx_ != -1 && cy_ != -1 && fx_ != -1 && fy_ != -1);
+    BOOST_ASSERT(frame);
+    BOOST_ASSERT(width_ != -1 && height_ != -1 && cx_ != -1 && cy_ != -1 && fx_ != -1 && fy_ != -1);
 
     frame->timestamp_ = pcd.header.stamp * 1e-9;
     frame->depth_ = DepthMatPtr(new DepthMat(height_, width_));
@@ -175,11 +175,11 @@ namespace clams
     const DepthMat& dm = *frame.depth_;
     cv::Mat3b img = frame.img_;
 
-    ROS_ASSERT(fx_ > 0 && fy_ > 0 && cx_ > 0 && cy_ > 0);
-    ROS_ASSERT(dm.rows() == img.rows);
-    ROS_ASSERT(dm.cols() == img.cols);
-    ROS_ASSERT(img.rows == height_);
-    ROS_ASSERT(img.cols == width_);
+    BOOST_ASSERT(fx_ > 0 && fy_ > 0 && cx_ > 0 && cy_ > 0);
+    BOOST_ASSERT(dm.rows() == img.rows);
+    BOOST_ASSERT(dm.cols() == img.cols);
+    BOOST_ASSERT(img.rows == height_);
+    BOOST_ASSERT(img.cols == width_);
     
     pcd->clear();
     pcd->height = dm.rows();
@@ -206,7 +206,7 @@ namespace clams
   
   void FrameProjector::project(const ProjectivePoint& ppt, Point* pt) const
   {
-    ROS_ASSERT(ppt.u_ >= 0 && ppt.v_ >= 0 && ppt.u_ < width_ && ppt.v_ < height_);
+    BOOST_ASSERT(ppt.u_ >= 0 && ppt.v_ >= 0 && ppt.u_ < width_ && ppt.v_ < height_);
 
     pt->r = ppt.r_;
     pt->g = ppt.g_;
@@ -226,7 +226,7 @@ namespace clams
   
   void FrameProjector::project(const Point& pt, ProjectivePoint* ppt) const
   {
-    ROS_ASSERT(isFinite(pt));
+    BOOST_ASSERT(isFinite(pt));
     
     ppt->u_ = pt.x * fx_ / pt.z + cx_;
     ppt->v_ = pt.y * fy_ / pt.z + cy_;
@@ -253,12 +253,12 @@ namespace clams
 
   void FrameProjector::serialize(std::ostream& out) const
   {
-    ROS_ASSERT(width_ != -1);
-    ROS_ASSERT(height_ != -1);
-    ROS_ASSERT(fx_ != -1);
-    ROS_ASSERT(fy_ != -1);
-    ROS_ASSERT(cx_ != -1);
-    ROS_ASSERT(cy_ != -1);
+    BOOST_ASSERT(width_ != -1);
+    BOOST_ASSERT(height_ != -1);
+    BOOST_ASSERT(fx_ != -1);
+    BOOST_ASSERT(fy_ != -1);
+    BOOST_ASSERT(cx_ != -1);
+    BOOST_ASSERT(cy_ != -1);
 
     out << "FrameProjector v01" << endl;
     eigen_extensions::serializeScalar(width_, out);
@@ -273,7 +273,7 @@ namespace clams
   {
     string buf;
     getline(in, buf);
-    ROS_ASSERT(buf == "FrameProjector v01");
+    BOOST_ASSERT(buf == "FrameProjector v01");
     eigen_extensions::deserializeScalar(in, &width_);
     eigen_extensions::deserializeScalar(in, &height_);
     eigen_extensions::deserializeScalar(in, &fx_);

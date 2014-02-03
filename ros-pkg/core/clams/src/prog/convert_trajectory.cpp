@@ -2,6 +2,7 @@
 #include <stream_sequence/stream_sequence_base.h>
 #include <boost/program_options.hpp>
 #include <boost/filesystem.hpp>
+#include <boost/assert.hpp>
 
 using namespace std;
 namespace bfs = boost::filesystem;
@@ -54,7 +55,7 @@ int main(int argc, char** argv)
     
     double dt;
     size_t idx = sseq->seek(timestamp, &dt);
-    ROS_ASSERT(dt < 1e-6);
+    BOOST_ASSERT(dt < 1e-6);
 
     Quaternion<double> rotation(qw, qx, qy, qz);
     Translation<double, 3> translation(tx, ty, tz);

@@ -1,6 +1,7 @@
 #ifndef STREAM_SEQUENCE_BASE_H
 #define STREAM_SEQUENCE_BASE_H
 
+#include <boost/assert.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/shared_ptr.hpp>
 #include <pcl/io/pcd_io.h>
@@ -98,7 +99,7 @@ namespace clams
 
     inline clams::Cloud::ConstPtr at (size_t idx) const
     {
-      ROS_ASSERT (idx < frames_.size ());
+      BOOST_ASSERT (idx < frames_.size ());
       return (operator[] (idx));
     }
     

@@ -6,8 +6,10 @@ make the clams library and apps:
 mkdir build && cd build && cmake .. && make && cd -
 ```
 ##Step 2
-make the sdf_tracker library and app:
-  cd sdf_tracker && mkdir build && cd build && cmake .. && make && cd -
+make the tracker library and app (in this case sdf_tracker is being used):
+```Shell
+cd sdf_tracker && mkdir build && cd build && cmake .. && make && cd -
+```
 
 ##Step 3
 Use bin/pcl_openni_image to record image sequences (press spacebar to start/stop recording of frames from the camera) 

@@ -2,8 +2,9 @@
 
 ##Step 1
 make the clams library and apps:
-  mkdir build && cd build && cmake .. && make && cd -
-
+```Shell
+mkdir build && cd build && cmake .. && make && cd -
+```
 ##Step 2
 make the sdf_tracker library and app:
   cd sdf_tracker && mkdir build && cd build && cmake .. && make && cd -
@@ -110,7 +111,7 @@ clams/
 Then run
 
 ```Shell
-  ./bin/calibrate
+./bin/calibrate
 ```
 
 This might take some time, so you can go and have lunch or read a nice paper.

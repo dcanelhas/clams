@@ -1,14 +1,14 @@
 ##Recipe for using CLAMS
 
-#Step 1
+##Step 1
 make the clams library and apps:
   mkdir build && cd build && cmake .. && make && cd -
 
-#Step 2
+##Step 2
 make the sdf_tracker library and app:
   cd sdf_tracker && mkdir build && cd build && cmake .. && make && cd -
 
-#Step 3
+##Step 3
 Use bin/pcl_openni_image to record image sequences (press spacebar to start/stop recording of frames from the camera) 
 suppose you record one sequence and save this to sequences/set_01/. 
 
@@ -22,7 +22,7 @@ The important thing to note here is that for best results:
   b. Your sequence should not challenge your tracking algorithm too much
   c. All pixels in the depth image should be repeatedly exposed to some surface across a range of different distances.
 
-#Step 4 
+##Step 4 
 in your sequences/set_01/ directory you will find a series of images in the following format:
   frame_20140129T160619.901251_depth.pclzf
   frame_20140129T160619.901251_rgb.pclzf
@@ -38,7 +38,7 @@ mkdir freiburg
 ./bin/sseq_to_freiburg --src sequences/set_01/ --dst freiburg/set_01
 ```
 
-#Step 5
+##Step 5
 Generate a trajectory for this sequence by using the tracker:
 ```Shell
 ./sdf_tracker/bin/tracker_clams freiburg/set_01
@@ -47,7 +47,7 @@ Generate a trajectory for this sequence by using the tracker:
 The result is (accuracy considerations aside) a trajectory file (trajectory.txt) in the directory
   freiburg/set_01/trajectory/
 
-#Step 6 
+##Step 6 
 To be used by clams, this trajectory file has to be converted to the clams binary format:
 
 ```Shell
@@ -61,7 +61,7 @@ To be used by clams, this trajectory file has to be converted to the clams binar
 
 (NOTE trajectory has to be named "trajectory" and be in a subdirectory under slam_results)
 
-#Step 7
+##Step 7
 
 A "ground truth" map has to be generated against which to calibrate the sensor (given the trajectory). This is done on the premise that the measurements from up-close are good (the mean of several measurents is taken using a voxel grid filter). However, you could generate the calibration_map yourself if you have a nice tsdf reconstruction, for example. 
 The parameter --max-range is used to conservatively discard distant measurements. 
@@ -72,7 +72,7 @@ The parameter --max-range is used to conservatively discard distant measurements
 
 (NOTE the name of the map file is not optional)
 
-#Step 8 (Optional)
+##Step 8 (Optional)
 Visualize the map to check if the reconstruction algorithm did its job.
 
 ```Shell
@@ -80,8 +80,8 @@ Visualize the map to check if the reconstruction algorithm did its job.
 ```
 (NOTE press <h> to print help to stdout, <ESC> to close the app)
 
-#Step 9
-Generate the calibration. This #step requires the directory slam_results to contain one subdirectory for each sequence, each containing the clams format "trajectory" file and a "calibration_map.pcd". There must also be a directory called "sequences" containing stream sequences within subdirectories that match the ones in "slam_results". In other words, you should have the following file structure, at least set_01, set_02 etc is not mandatory but have to be consistently named.
+##Step 9
+Generate the calibration. This step requires the directory slam_results to contain one subdirectory for each sequence, each containing the clams format "trajectory" file and a "calibration_map.pcd". There must also be a directory called "sequences" containing stream sequences within subdirectories that match the ones in "slam_results". In other words, you should have the following file structure, at least set_01, set_02 etc is not mandatory but have to be consistently named.
 
 ```
 clams/
@@ -115,11 +115,11 @@ Then run
 
 This might take some time, so you can go and have lunch or read a nice paper.
 
-#Step 10
+##Step 10
 The calibration results can be visualised within 
   distortion_model-visualization/
 
-#Step 11
+##Step 11
 You can also run 
 
 ```Shell

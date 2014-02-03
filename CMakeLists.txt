@@ -50,7 +50,7 @@ if(VTK_FOUND)
   include(${VTK_USE_FILE})
 endif()
 
-find_package(Boost 1.53 COMPONENTS program_options thread filesystem REQUIRED) #Set your own version
+find_package(Boost 1.49 COMPONENTS program_options thread filesystem REQUIRED) #Set your own version
 
 ###Libraries built by this project
 ###bag_of_tricks

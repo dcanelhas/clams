@@ -83,6 +83,7 @@ Visualize the map to check if the reconstruction algorithm did its job.
 #Step 9
 Generate the calibration. This #step requires the directory slam_results to contain one subdirectory for each sequence, each containing the clams format "trajectory" file and a "calibration_map.pcd". There must also be a directory called "sequences" containing stream sequences within subdirectories that match the ones in "slam_results". In other words, you should have the following file structure, at least set_01, set_02 etc is not mandatory but have to be consistently named.
 
+```
 clams/
 |||
 |||-sequences/
@@ -103,6 +104,7 @@ clams/
     |||-depth/<(frames)>
     ||-rgb/<(frames)>
     |-trajectory/trajectory.txt
+```
 
 
 Then run

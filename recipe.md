@@ -21,9 +21,9 @@ mkdir -p sequences/set_01
 (NOTE This directory has to be named sequences and contain the individual sequences in its subdirectories)
 
 The important thing to note here is that for best results:
-  -a. Your sequence should see the *same* surfaces from distances ranging from 0m and up to about 10 m
-  -b. Your sequence should not challenge your tracking algorithm too much
-  -c. All pixels in the depth image should be repeatedly exposed to some surface across a range of different distances.
+  - a. Your sequence should see the *same* surfaces from distances ranging from 0m and up to about 10 m
+  - b. Your sequence should not challenge your tracking algorithm too much
+  - c. All pixels in the depth image should be repeatedly exposed to some surface across a range of different distances.
 
 ##Step 4 
 in your sequences/set_01/ directory you will find a series of images in the following format:

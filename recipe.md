@@ -27,9 +27,9 @@ The important thing to note here is that for best results:
 
 ##Step 4 
 in your sequences/set_01/ directory you will find a series of images in the following format:
-  frame_20140129T160619.901251_depth.pclzf
-  frame_20140129T160619.901251_rgb.pclzf
-  frame_20140129T160619.901251.xml
+  - frame_20140129T160619.901251_depth.pclzf
+  - frame_20140129T160619.901251_rgb.pclzf
+  - frame_20140129T160619.901251.xml
 For the packaged sdf_tracker-based app you will need to convert these to the freiburg dataset format using
 
 ```Shell

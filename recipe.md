@@ -30,6 +30,7 @@ in your sequences/set_01/ directory you will find a series of images in the foll
   - frame_20140129T160619.901251_depth.pclzf
   - frame_20140129T160619.901251_rgb.pclzf
   - frame_20140129T160619.901251.xml
+
 For the packaged sdf_tracker-based app you will need to convert these to the freiburg dataset format using
 
 ```Shell
